@@ -34,7 +34,9 @@ export function Countdown() {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
           new Date(),
-          activeCycle.startDate,
+          // if startDate comes from localStorage, it will be a string and not a Date object
+          // so we need to convert it to a Date object
+          new Date(activeCycle.startDate),
         )
         const isCycleCountdownFinishe = secondsDifference >= totalSeconds
         if (isCycleCountdownFinishe) {
