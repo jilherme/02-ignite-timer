@@ -1,6 +1,6 @@
 import { differenceInSeconds } from 'date-fns'
 import { createContext, ReactNode, useEffect, useReducer, useState } from 'react'
-import { ActionTypes, addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from '../reducers/cycles/actions'
+import { addNewCycleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from '../reducers/cycles/actions'
 import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
 
 interface CreateCycleData {
@@ -40,6 +40,7 @@ export function CyclesContextProvider({
     
     return initialState
   })
+  
   const { activeCycleId, cycles } = cyclesState
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
@@ -53,14 +54,12 @@ export function CyclesContextProvider({
   })
 
 
+
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds)
   }
 
-  function markCurrentCycleAsFinished() {
-    dispatch(markCurrentCycleAsFinishedAction)
-  }
-
+  
   function createNewCycle(data: CreateCycleData) {
     const id = String(new Date().getTime())
 
@@ -77,9 +76,12 @@ export function CyclesContextProvider({
   }
 
   function interruptCurrentCycle() {
-    dispatch(interruptCurrentCycleAction)
+    dispatch(interruptCurrentCycleAction())
   }
 
+  function markCurrentCycleAsFinished() {
+    dispatch(markCurrentCycleAsFinishedAction())
+  }
 
   useEffect(() => {
     const stateJson = JSON.stringify(cyclesState)
