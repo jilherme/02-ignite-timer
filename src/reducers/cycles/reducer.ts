@@ -37,7 +37,6 @@ export function cyclesReducer(state: CyclesState, action: any) {
       })
     }
     case ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED: {
-
       const currentCycleIndex = state.cycles.findIndex(cycle => {
         return cycle.id === state.activeCycleId
       })
