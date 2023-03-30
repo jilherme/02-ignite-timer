@@ -4,7 +4,9 @@ export const HistoryContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 3.5rem;
+  @media (min-width: 900px) {
+    padding: 3.5rem;
+  }
 
   h1 {
     font-size: 1.5rem;
